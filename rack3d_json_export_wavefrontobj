@@ -1,0 +1,53 @@
+#!/bin/python3.6
+
+import json
+import sys
+
+# import json from stdin
+data = json.load(sys.stdin)
+
+# export obj data
+vert=0
+face=0
+for thing in data:
+    model_name = thing['model_name']
+    mm_x_min = thing['mm_x_min']
+    mm_x_max = thing['mm_x_max']
+    mm_y_min = thing['mm_y_min']
+    mm_y_max = thing['mm_y_max']
+    mm_z_min = thing['mm_z_min']
+    mm_z_max = thing['mm_z_max']
+    # rotate on y axis to compensate for blender import
+    temp = mm_y_min
+    mm_y_min = mm_z_min
+    mm_z_min = mm_y_max * -1
+    mm_y_max = mm_z_max
+    mm_z_max = temp * -1
+    # output to obj file
+    print("o {}".format(model_name))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_min, 0.001*mm_y_min, 0.001*mm_z_min))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_min, 0.001*mm_y_max, 0.001*mm_z_min))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_max, 0.001*mm_y_max, 0.001*mm_z_min))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_max, 0.001*mm_y_min, 0.001*mm_z_min))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_min, 0.001*mm_y_min, 0.001*mm_z_max))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_min, 0.001*mm_y_max, 0.001*mm_z_max))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_max, 0.001*mm_y_max, 0.001*mm_z_max))
+    print("v {0:.2f} {0:.2f} {0:.2f}".format(0.001*mm_x_max, 0.001*mm_y_min, 0.001*mm_z_max))
+    print("vn 0.0 0.0 -1.0")
+    print("vn 0.0 0.0 1.0")
+    print("vn 0.0 1.0 0.0")
+    print("vn 1.0 0.0 0.0")
+    print("vn 0.0 -1.0 0.0")
+    print("vn -1.0 0.0 0.0")
+    print("usemtl {}".format(model_name))
+    print("s off")
+    print("f {}//{} {}//{} {}//{} {}//{}".format((vert+2), (face+3), (vert+6), (face+3), (vert+7), (face+3), (vert+3), (face+3)))
+    print("f {}//{} {}//{} {}//{} {}//{}".format((vert+5), (face+2), (vert+8), (face+2), (vert+7), (face+2), (vert+6), (face+2)))
+    print("f {}//{} {}//{} {}//{} {}//{}".format((vert+2), (face+3), (vert+6), (face+3), (vert+7), (face+3), (vert+3), (face+3)))
+    print("f {}//{} {}//{} {}//{} {}//{}".format((vert+3), (face+4), (vert+7), (face+4), (vert+8), (face+4), (vert+4), (face+4)))
+    print("f {}//{} {}//{} {}//{} {}//{}".format((vert+4), (face+5), (vert+8), (face+5), (vert+5), (face+5), (vert+1), (face+5)))
+    print("f {}//{} {}//{} {}//{} {}//{}".format((vert+1), (face+6), (vert+5), (face+6), (vert+6), (face+6), (vert+2), (face+6)))
+    print("")
+    vert = vert + 8
+    face = face + 6
+
