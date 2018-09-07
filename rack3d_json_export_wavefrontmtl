@@ -9,13 +9,13 @@ data = json.load(sys.stdin)
 # export mtl data
 for thing in data:
     model_name = thing['model_name']
-    rgb_b = thing['rgb_b']
-    rgb_g = thing['rgb_g']
-    rgb_r = thing['rgb_r']
+    rgb_b = thing['rgb_b']/255
+    rgb_g = thing['rgb_g']/255
+    rgb_r = thing['rgb_r']/255
     print("newmtl {}".format(model_name))
     print("Ns 96.078431")
     print("Ka 1.000000 1.000000 1.000000")
-    print("Kd {0:.2f} {0:.2f} {0:.2f}".format(rgb_r, rgb_g, rgb_b))
+    print("Kd {} {} {}".format(rgb_r, rgb_g, rgb_b))
     print("Ks 0.500000 0.500000 0.500000")
     print("Ke 0.000000 0.000000 0.000000")
     print("Ni 1.000000")
