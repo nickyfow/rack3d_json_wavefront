@@ -1,7 +1,7 @@
 # rack3d_json_export_wavefront  
-simple tools to generate wavefront 3d models from rack3d json  
+convert rack3d json to wavefront model files  
 
-/bin/python3.6 rack3d_json_export_wavefrontobj < rack3d.json > demo.obj  
-/bin/python3.6 rack3d_json_export_wavefrontmtl < rack3d.json > demo.mtl  
+python3.6 rack3d_json_export_wavefrontobj < rack3d.json > demo.obj  
+python3.6 rack3d_json_export_wavefrontmtl < rack3d.json > demo.mtl  
   
-racktables > file > import > wavefront(.obj)  
+import into racktables ( file > import > wavefront(.obj) ) 
