@@ -15,22 +15,16 @@ for thing in data:
     mm_y_max = thing['mm_y_max']
     mm_z_min = thing['mm_z_min']
     mm_z_max = thing['mm_z_max']
-    # rotate on y axis to compensate for blender import
-    temp = mm_y_min
-    mm_y_min = mm_z_min
-    mm_z_min = mm_y_max * -1
-    mm_y_max = mm_z_max
-    mm_z_max = temp * -1
     # output to obj file
     print("o {}".format(id))
-    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_y_min, 0.001*mm_z_min))
-    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_y_max, 0.001*mm_z_min))
-    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_y_max, 0.001*mm_z_min))
-    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_y_min, 0.001*mm_z_min))
-    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_y_min, 0.001*mm_z_max))
-    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_y_max, 0.001*mm_z_max))
-    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_y_max, 0.001*mm_z_max))
-    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_y_min, 0.001*mm_z_max))
+    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_z_min, -0.001*mm_y_max))
+    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_z_max, -0.001*mm_y_max))
+    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_z_max, -0.001*mm_y_max))
+    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_z_min, -0.001*mm_y_max))
+    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_z_min, -0.001*mm_y_min))
+    print("v {} {} {}".format(0.001*mm_x_min, 0.001*mm_z_max, -0.001*mm_y_min))
+    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_z_max, -0.001*mm_y_min))
+    print("v {} {} {}".format(0.001*mm_x_max, 0.001*mm_z_min, -0.001*mm_y_min))
     print("vn -1.0 0.0 0.0")
     print("vn 1.0 0.0 0.0")
     print("vn 0.0 -1.0 0.0")
